@@ -9,7 +9,6 @@ plugins {
 }
 
 android {
-    namespace = "com.example.biblioteca"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -31,6 +30,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        namespace = "com.example.biblioteca"
     }
 
     buildTypes {

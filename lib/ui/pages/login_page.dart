@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 50),
             CustomTextFormField(
-                labelText: "Usuário", controller: emailController),
+                labelText: "Email", controller: emailController),
             const SizedBox(height: 10),
             CustomPasswordFormField(
                 labelText: "Senha", controller: passwordController),

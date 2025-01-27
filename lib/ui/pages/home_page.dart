@@ -1,4 +1,7 @@
 import 'package:biblioteca/services/auth_service.dart';
+import 'package:biblioteca/ui/pages/profile.dart';
+import 'package:biblioteca/ui/pages/library_page.dart';
+import 'package:biblioteca/ui/pages/books_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +15,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Search Page'),
-    Text('Home Page'),
-    Text('Profile Page'),
+  static final List<Widget> _widgetOptions = <Widget>[
+    BooksPage(),
+    LibraryPage(),
+    ProfilePage()
   ];
 
   void _onItemTapped(int index) {
@@ -27,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildIcon(IconData icon, bool isSelected) {
     return Icon(
       icon,
-      color: isSelected ? Colors.blue : Colors.grey,
+      color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
     );
   }
 
@@ -37,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Biblioteca Virtual'),
         actions: [
           IconButton(
             icon: const Icon(Icons.exit_to_app),
@@ -57,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blue,
               ),
               child: Text(
-                'Menu',
+                'Menu Principal',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -76,7 +79,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.search),
-              title: const Text('Search'),
+              title: const Text('Meus Livros'),
               onTap: () {
                 setState(() {
                   _selectedIndex = 0;
@@ -85,11 +88,11 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Profile'),
+              leading: const Icon(Icons.library_books),
+              title: const Text('Biblioteca'),
               onTap: () {
                 setState(() {
-                  _selectedIndex = 2;
+                  _selectedIndex = 1;
                 });
                 Navigator.pop(context);
               },
@@ -113,19 +116,19 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.search, _selectedIndex == 0),
-            label: 'Search',
+            label: 'Meus Livros',
           ),
           BottomNavigationBarItem(
-            icon: _buildIcon(Icons.home, _selectedIndex == 1),
-            label: 'Home',
+            icon: _buildIcon(Icons.library_books, _selectedIndex == 1),
+            label: 'Biblioteca',
           ),
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.person, _selectedIndex == 2),
-            label: 'Profile',
+            label: 'Perfil',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),

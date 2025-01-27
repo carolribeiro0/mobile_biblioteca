@@ -36,12 +36,22 @@ dependencies:
   cupertino_icons: ^1.0.8
   firebase_core: ^3.10.0
   provider: ^6.1.2
+  path_provider: ^2.0.11
   firebase_auth: ^5.4.0
+  cloud_firestore: ^5.6.1
+  firebase_storage: ^12.4.0
   google_fonts: ^6.2.1
+  image_picker: ^1.1.2
+  permission_handler: ^10.2.0
+  http: ^1.2.2
+  flutter_native_splash: ^2.2.17
+  flutter_launcher_icons: ^0.14.3
+  barcode_scan2: ^4.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -60,6 +70,24 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/logo_app.png
+    - assets/images/
+
+
+flutter_native_splash:
+  color: "#FFFFFF" # Cor de fundo branca
+  image: assets/logo_app.png # Caminho para o logo
+  android: true # Habilitar apenas para Android
+  ios: false # Desabilitar para iOS
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/logo_app.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

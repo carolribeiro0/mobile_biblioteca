@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:biblioteca/services/shelves_service.dart';
 import 'package:biblioteca/ui/pages/add_book_page.dart';
+import 'package:biblioteca/services/report_service.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class LibraryPage extends StatefulWidget {
 class _LibraryPageState extends State<LibraryPage> {
   final ShelvesService _shelvesService = ShelvesService();
   final TextEditingController _shelfController = TextEditingController();
+  final ReportService _reportService = ReportService();
 
   Stream<List<Map<String, dynamic>>> _shelvesStream() {
     final user = FirebaseAuth.instance.currentUser;
@@ -37,6 +39,7 @@ class _LibraryPageState extends State<LibraryPage> {
         throw Exception('Usuário não autenticado.');
       }
       await _shelvesService.addShelf(shelfName);
+      await _reportService.logAction('Adicionou estante: $shelfName');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
@@ -52,6 +55,7 @@ class _LibraryPageState extends State<LibraryPage> {
         builder: (context) => AddBookPage(shelfId: shelfId),
       ),
     );
+    _reportService.logAction('Navegou para adicionar livro na estante: $shelfId');
   }
 
   Widget _buildShelf(Map<String, dynamic> shelf) {
@@ -214,7 +218,7 @@ class _LibraryPageState extends State<LibraryPage> {
         onPressed: _showAddShelfDialog,
         label: const Text('Nova Estante'),
         icon: const Icon(Icons.add),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.purple,
       ),
     );
   }

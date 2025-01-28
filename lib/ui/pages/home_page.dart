@@ -2,6 +2,7 @@ import 'package:biblioteca/services/auth_service.dart';
 import 'package:biblioteca/ui/pages/profile.dart';
 import 'package:biblioteca/ui/pages/library_page.dart';
 import 'package:biblioteca/ui/pages/books_page.dart';
+import 'package:biblioteca/ui/pages/report_page.dart'; // Add this line
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
 
   static final List<Widget> _widgetOptions = <Widget>[
+    ReportPage(),
     BooksPage(),
     LibraryPage(),
     ProfilePage()
@@ -79,6 +81,16 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.search),
+              title: const Text('Relatório'),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.search),
               title: const Text('Meus Livros'),
               onTap: () {
                 setState(() {
@@ -114,6 +126,10 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: _buildIcon(Icons.report, _selectedIndex == 0),
+            label: 'Relatório',
+          ),
           BottomNavigationBarItem(
             icon: _buildIcon(Icons.search, _selectedIndex == 0),
             label: 'Meus Livros',

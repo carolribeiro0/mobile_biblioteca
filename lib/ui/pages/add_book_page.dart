@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:biblioteca/services/books_service.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:biblioteca/services/report_service.dart';
 
 class AddBookPage extends StatefulWidget {
   final String shelfId;
@@ -16,6 +17,7 @@ class AddBookPage extends StatefulWidget {
 class _AddBookPageState extends State<AddBookPage> {
   final BooksService _booksService = BooksService();
   final TextEditingController _bookNameController = TextEditingController();
+  final ReportService _reportService = ReportService();
   final TextEditingController _authorController = TextEditingController();
   final TextEditingController _yearController = TextEditingController();
   final TextEditingController _numPagesController = TextEditingController();
@@ -120,6 +122,8 @@ class _AddBookPageState extends State<AddBookPage> {
         imagePath: _selectedImage!.path,
       );
 
+      await _reportService.logAction('Adicionou um livro: ${_bookNameController.text}');
+      
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Livro adicionado com sucesso!')),

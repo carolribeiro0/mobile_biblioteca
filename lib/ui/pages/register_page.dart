@@ -76,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Icon(
-                  Icons.chat_outlined,
+                  Icons.book,
                   size: 150,
                   color: Theme.of(context).colorScheme.primary,
                 ),
